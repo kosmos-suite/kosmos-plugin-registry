@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kosmos-suite/kosmos-plugin-registry/schema/entry.schema.json",
+  "title": "Kosmos plugin registry entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slug", "name", "description", "category", "publisher", "repository", "version", "checksum"],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,48}[a-z0-9]$",
+      "description": "Must match the plugin's own manifest.json slug exactly."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 280
+    },
+    "category": {
+      "type": "string",
+      "enum": ["Metadata", "Artwork", "Subtitles", "Sync"]
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
+      "description": "GitHub 'owner/repo' shorthand, not a full URL."
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The exact GitHub release tag this entry is pinned to. Bumping the plugin's version requires a new PR updating this field and checksum together."
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "sha256 of the release's .wasm asset, checked byte-for-byte by CI and again by Kosmos at install time."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

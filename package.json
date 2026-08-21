@@ -1,0 +1,11 @@
+{
+  "name": "kosmos-plugin-registry",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
